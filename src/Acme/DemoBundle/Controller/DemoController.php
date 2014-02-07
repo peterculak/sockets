@@ -32,6 +32,15 @@ class DemoController extends Controller
     }
 
     /**
+     * @Route("/sockets", name="_sockets")
+     * @Template()
+     */
+    public function socketsAction()
+    {
+        return array();
+    }
+
+    /**
      * @Route("/contact", name="_demo_contact")
      * @Template()
      */

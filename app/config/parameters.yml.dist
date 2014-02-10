@@ -13,3 +13,7 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+    clank_host:    192.168.0.10
+    clank_port:    80
+    site_host:     192.168.0.10
+    site_port:     8080

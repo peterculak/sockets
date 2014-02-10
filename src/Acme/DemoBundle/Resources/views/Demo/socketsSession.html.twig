@@ -1,0 +1,17 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+
+{% block title "Sockets" %}
+
+{% block content %}
+    <script>
+        var sessionId = "{{ sessionId }}";
+    </script>
+    <h2>Debug log</h2>
+    <div id="console"></div>
+    {{ clank_client() }}
+    {% javascripts
+    '@AcmeDemoBundle/Resources/public/js/*'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

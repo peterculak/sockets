@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Acme\DemoBundle\Form\ContactType;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 // these import the "@Route" and "@Template" annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -37,7 +38,24 @@ class DemoController extends Controller
      */
     public function socketsAction()
     {
-        return array();
+        $session = $this->getSession();
+        $url = 'http://' . $this->container->parameters['site_host'] . ':' . $this->container->parameters['site_port'] . '/demo/sockets/' . $session->getId();
+
+        return array(
+            'sessionId' => $session->getId(),
+            'qrCodeUrl' => $url
+        );
+    }
+
+    /**
+     * @Route("/sockets/{sessionIdFromRemote}", name="_demo_socket_session")
+     * @Template()
+     */
+    public function socketsSessionAction($sessionIdFromRemote)
+    {
+        return array(
+            'sessionId' => $sessionIdFromRemote,
+        );
     }
 
     /**
@@ -61,5 +79,15 @@ class DemoController extends Controller
         }
 
         return array('form' => $form->createView());
+    }
+
+    private function getSession()
+    {
+        $session = $this->getRequest()->getSession(); // Get started session
+        if (!$session->isStarted()) {
+            $session = new Session(); // if there is no session, start it
+            $session->start();
+        }
+        return $session;
     }
 }

@@ -3,6 +3,9 @@
 {% block head %}
     <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/demo.css') }}" />
+    <script type="text/javascript">
+        var _CLANK_URI = "ws://{{ clank_host }}:{{ clank_port }}";
+    </script>
 {% endblock %}
 
 {% block title 'Demo Bundle' %}

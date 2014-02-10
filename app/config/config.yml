@@ -29,6 +29,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+      clank_host:    "%clank_host%"
+      clank_port:    "%clank_port%"
 
 # Assetic Configuration
 assetic:
@@ -71,5 +74,9 @@ swiftmailer:
 
 clank:
     web_socket_server:
-        port: 80        #The port the socket server will listen on
-        host: 192.168.0.10   #(optional) The host ip to bind to
+        port: "%clank_port%"
+        host: "%clank_host%"
+    topic:
+        -
+            name: "acme" #Important! this is the topic namespace used to match to this service!
+            service: "acme_hello.topic_sample_service" #The service id.
